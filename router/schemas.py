@@ -34,3 +34,14 @@ class PostDisplay(BaseModel):
     user: User
     class Confing():
         orm_mode = True
+        
+        
+class CommentDisplay(BaseModel):
+    id : int
+    content: str
+    user_id : int
+    post_id : int
+    timestamp : datetime
+    user: User
+    class Confing():
+        orm_mode = True
