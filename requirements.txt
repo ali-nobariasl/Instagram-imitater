@@ -3,3 +3,5 @@ uvicorn
 sqlalchemy
 passlib     # for hashing
 bcrypt      # for hasihing
+python-multipart  #able to upload a file
+aiofiles    #for setting file folder staticl accessable
