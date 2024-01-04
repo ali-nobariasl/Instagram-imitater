@@ -6,13 +6,15 @@ from db.models import DbPost
 from router.schemas import PostBase, PostDisplay
 from db import db_post
 from db.database import get_db
+from router.schemas import UserAuth
+from auth.oauth2 import get_current_user
 
 router = APIRouter(prefix='/post',tags=['post'])
 
 imag_url_types = ['absolute', 'relative']
 
 @router.post('/post', response_model=PostDisplay)
-def create_new_post(request:PostBase, db:Session= Depends(get_db)):
+def create_new_post(request:PostBase, db:Session= Depends(get_db),current_user:UserAuth= Depends(get_current_user)):
     if not request.img_url_type in imag_url_types:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                     detail='imagr url types could accpete absulut and relative values')
@@ -25,7 +27,7 @@ def get_all_posts(db:Session= Depends(get_db)):
 
 
 @router.post('/uploudimage')
-def upload_image(image:UploadFile=File(...)):
+def upload_image(image:UploadFile=File(...), current_user:UserAuth= Depends(get_current_user)):
     letters = string.ascii_letters
     rand_str = ''.join(random.choice(letters) for i in range(6))
     new = f'_{rand_str}'

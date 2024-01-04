@@ -45,3 +45,9 @@ class CommentDisplay(BaseModel):
     user: User
     class Confing():
         orm_mode = True
+        
+        
+class UserAuth(BaseModel):
+    id : int
+    usernmae: str
+    email: str
