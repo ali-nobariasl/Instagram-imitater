@@ -1,7 +1,8 @@
 fastapi
 uvicorn
 sqlalchemy
-passlib     # for hashing
-bcrypt      # for hasihing
+passlib       # for hashing
+bcrypt        # for hasihing
 python-multipart  #able to upload a file
-aiofiles    #for setting file folder staticl accessable
+aiofiles      # for setting file folder staticl accessable
+python-jose   # for authentication
