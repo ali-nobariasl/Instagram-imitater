@@ -47,7 +47,7 @@ class PostDisplay(BaseModel):
     class Confing():
         orm_mode = True
         
-class commentBase(BaseModel):
+class CommentBase(BaseModel):
     id: int
     username : str
     email : str
