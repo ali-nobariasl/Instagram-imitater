@@ -7,7 +7,7 @@ from router.schemas import PostBase, PostDisplay
 from db import db_post
 from db.database import get_db
 
-router = APIRouter(prefix='post',tags=['post'])
+router = APIRouter(prefix='/post',tags=['post'])
 
 imag_url_types = ['absolute', 'relative']
 
@@ -15,7 +15,10 @@ imag_url_types = ['absolute', 'relative']
 def create_new_post(request:PostBase, db:Session= Depends(get_db)):
     if not request.img_url_type in imag_url_types:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail='imagr url types could accpete absulut and relative values')
-    
-    
+                    detail='imagr url types could accpete absulut and relative values')
     return db_post.create_post(request, db)
+
+
+@router.get('/get_all',response_model=[PostDisplay])
+def get_all_posts(db:Session= Depends(get_db)):
+    return db_post.get_posts(db)

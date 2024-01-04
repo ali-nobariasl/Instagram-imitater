@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 from sqlalchemy.orm.session import Session
 
 from db.models import DbPost
@@ -17,3 +17,8 @@ def create_post(request:PostBase, db:Session):
     db.commit()
     db.refresh(new_post)
     return new_post
+
+def get_posts(db:Session):
+    posts = db.query(DbPost).all()
+    if posts:
+        return posts
