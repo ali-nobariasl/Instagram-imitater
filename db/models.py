@@ -27,7 +27,7 @@ class DbPost(Base):
     comments = relationship('DbComment', back_populates='post')
     
 class DbComment(Base):
-    __tablenmame__ = 'comment'
+    __tablename__ = 'comment'
     id = Column(Integer, primary_key=True, index=True)
     context = Column(String)
     username = Column(String)

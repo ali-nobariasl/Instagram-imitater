@@ -20,8 +20,8 @@ def create_post(request:PostBase, db:Session):
 
 def get_posts(db:Session):
     posts = db.query(DbPost).all()
-    if posts:
-        return posts
+    
+    return posts
     
     
 def delete(id:int, db:Session,user_id:int ):
