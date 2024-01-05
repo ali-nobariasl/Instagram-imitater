@@ -14,7 +14,7 @@ router = APIRouter(prefix='/post',tags=['post'])
 
 imag_url_types = ['absolute', 'relative']
 
-@router.post('/post', response_model=PostDisplay)
+@router.post('/post')
 def create_new_post(request:PostBase, db:Session= Depends(get_db),current_user:UserAuth= Depends(get_current_user)):
     if not request.img_url_type in imag_url_types:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
@@ -22,7 +22,7 @@ def create_new_post(request:PostBase, db:Session= Depends(get_db),current_user:U
     return db_post.create_post(request, db)
 
 
-@router.get('/get_all',response_model=PostDisplay)
+@router.get('/get_all')
 def get_all_posts(db:Session= Depends(get_db)):
     return db_post.get_posts(db)
 

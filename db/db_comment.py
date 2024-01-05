@@ -7,9 +7,9 @@ from router.schemas import CommentBase
 
 def create_comments(db:Session, request:CommentBase):
     new_comment = DbComment(
-        context = request.text,
+        text = request.text,
         username = request.username,
-        post_id = request.id,
+        post_id = request.post_id,
         timestamp =  datetime.now()
     )    
     db.add(new_comment)
@@ -21,3 +21,6 @@ def create_comments(db:Session, request:CommentBase):
 def get_all_comments(db:Session, post_id:int):
     comments = db.query(DbComment).filter(DbComment.id == post_id)
     return comments
+
+
+

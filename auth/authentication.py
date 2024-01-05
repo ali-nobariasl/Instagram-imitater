@@ -16,7 +16,7 @@ def login(request:OAuth2PasswordRequestForm= Depends(), db:Session=Depends(get_d
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='invalid username')
     if not Hash.verify(user.password, request.password):
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='invalid username')
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='invalid password')
     
     access_token = create_access_token(data={'username':user.username})
     

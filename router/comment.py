@@ -15,3 +15,7 @@ router = APIRouter(prefix='/comment', tags=['comment'])
 def get_comments( post_id:int,db:Session= Depends(get_db)):
     return db_comment.get_all_comments(db, post_id)
 
+
+@router.post('/createpcomment/')
+def create_new_comment(request:CommentBase, db:Session=Depends(get_db)):
+    return db_comment.create_comments(db, request)

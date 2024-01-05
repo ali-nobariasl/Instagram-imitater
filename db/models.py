@@ -29,7 +29,7 @@ class DbPost(Base):
 class DbComment(Base):
     __tablename__ = 'comment'
     id = Column(Integer, primary_key=True, index=True)
-    context = Column(String)
+    text = Column(String)
     username = Column(String)
     post_id = Column(Integer,ForeignKey('post.id'))
     timestamp = Column(DateTime)

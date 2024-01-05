@@ -19,7 +19,7 @@ class PostBase(BaseModel):
     caption: str
     img_url : str
     img_url_type : str
-    creator_id : str
+    creator_id : int
 
 # for postdisplay
 class User(BaseModel):
@@ -48,9 +48,9 @@ class PostDisplay(BaseModel):
         orm_mode = True
         
 class CommentBase(BaseModel):
-    id: int
+    post_id: int
     username : str
-    email : str
+    text : str
        
 class CommentDisplay(BaseModel):
     id : int
