@@ -19,17 +19,19 @@ def root():
 
 
 # adding cors by using middleware 
-origins= [
-    'http://lcoalhost:3000'
+origins = [
+  'http://localhost:3000',
+  'http://localhost:3001',
+  'http://localhost:3002'
 ]
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins = origins,
-    allow_credentials = True,
-    allow_methods =['*'],
-    allow_headers = ['*']
-)
 
+app.add_middleware(
+  CORSMiddleware,
+  allow_origins=origins,
+  allow_credentials=True,
+  allow_methods=['*'],
+  allow_headers=['*']
+)
 
 
 models.Base.metadata.create_all(engine)

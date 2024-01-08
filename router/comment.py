@@ -1,6 +1,4 @@
 from sqlalchemy.orm.session import Session
-from datetime import datetime
-from db.models import DbComment
 from router.schemas import CommentBase
 from fastapi import APIRouter, Depends
 

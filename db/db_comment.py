@@ -19,7 +19,10 @@ def create_comments(db:Session, request:CommentBase):
 
 
 def get_all_comments(db:Session, post_id:int):
-    comments = db.query(DbComment).filter(DbComment.id == post_id)
+    if not post_id:
+        print(f"there is no post with {post_id}")
+        
+    comments = db.query(DbComment).filter(DbComment.post_id == post_id).all()
     return comments
 
 
