@@ -37,15 +37,15 @@ class Comment(BaseModel):
     
 
 class PostDisplay(BaseModel):
-    id : int
-    caption: str
-    img_url : str
-    img_url_type : str
-    timestamp : datetime
-    user: User
-    comment : List[Comment]
-    class Confing():
-        orm_mode = True
+  id: int
+  image_url: str
+  image_url_type: str
+  caption: str
+  timestamp: datetime
+  user: User
+  comments: List[Comment]
+  class Config():
+    orm_mode = True
         
 class CommentBase(BaseModel):
     post_id: int
