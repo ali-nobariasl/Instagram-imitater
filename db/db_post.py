@@ -1,38 +1,35 @@
-import datetime
-from sqlalchemy.orm.session import Session
 from fastapi import HTTPException, status
-from db.models import DbPost
 from router.schemas import PostBase
+from sqlalchemy.orm.session import Session
+from db.models import DbPost
+import datetime
 
 
-def create_post(request:PostBase, db:Session):
-    new_post = DbPost(
-        caption= request.caption , 
-        img_url = request.img_url,
-        img_url_type=request.img_url_type,
-        timestamp = datetime.datetime.now(),
-        user_id = request.creator_id
-    )
-    db.add(new_post)
-    db.commit()
-    db.refresh(new_post)
-    return new_post
+def create(db: Session, request: PostBase):
+  new_post = DbPost(
+    image_url = request.image_url,
+    image_url_type = request.image_url_type,
+    caption = request.caption,
+    timestamp = datetime.datetime.now(),
+    user_id = request.creator_id
+  )
+  db.add(new_post)
+  db.commit()
+  db.refresh(new_post)
+  return new_post
 
-def get_posts(db:Session):
-    posts = db.query(DbPost).all()
-    
-    return posts
-    
-    
-def delete(id:int, db:Session,user_id:int ):
-    post = db.query(DbPost).filter(DbPost.id == id).first()
-    if not post:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail='the post was not found')
-    if post.user_id != user_id:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
-                            detail='Only post creator can delete the post')
-    
-    db.delete(post)
-    db.commit()
-    return "Ok Baby :)"
+def get_all(db: Session):
+  return db.query(DbPost).all()
+
+def delete(db: Session, id: int, user_id: int):
+  post = db.query(DbPost).filter(DbPost.id == id).first()
+  if not post:
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, 
+          detail=f'Post with id {id} not found')
+  if post.user_id != user_id:
+    raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
+          detail='Only post creator can delete post')
+
+  db.delete(post)
+  db.commit()
+  return 'ok'
